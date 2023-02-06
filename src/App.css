@@ -1,0 +1,11 @@
+.App {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+}
+
+.AppBar{
+  width: 100vw;
+}
