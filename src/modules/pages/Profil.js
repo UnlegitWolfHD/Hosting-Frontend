@@ -10,7 +10,6 @@ import { ProfilForm, GameForm } from '../sections/user/profil';
 
 import loginService from '../../services/login.service';
 import userService from '../../services/user.service';
-import gameService from '../../services/game.service';
 
 
 // ----------------------------------------------------------------------
@@ -26,15 +25,11 @@ const RootStyle = styled('div')(({ theme }) => ({
 
 export default function Profil() {
   const [userData, setUserData] = useState(undefined)
-  const [gameData, setGameData] = useState(undefined)
-
+  
   useEffect(() => {
     loginService.getToken().then((res) => {
       localStorage.setItem('user', JSON.stringify(res.data));
       setUserData(res.data)
-      gameService.getUserGames(res.data.id).then((res2) => {
-        setGameData(res2.data)
-      })
     })
   }, [])
 
@@ -70,7 +65,6 @@ export default function Profil() {
           <Typography sx={{ color: 'text.secondary', mb: 5 }}></Typography>
           {userData ? (<ProfilForm userData={userData} onSubmitData={saveData} />) : <React.Fragment />}
           <Typography sx={{ color: 'text.secondary', mb: 5 }}></Typography>
-          {gameData ? (<GameForm gameData={gameData} />) : <React.Fragment />}
         </Container>
       </RootStyle>
     </Page>

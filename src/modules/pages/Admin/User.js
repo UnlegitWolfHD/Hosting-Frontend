@@ -88,8 +88,8 @@ export default function User() {
     if (filterName === "") search = "."
     UserService.getAllUser(search, page, rowsPerPage)
       .then(res => {
-        setUser(res.data.tempData)
-        setMaxItems(res.data.count)
+        setUser(res.data.result)
+        setMaxItems(res.data.totalCount)
       })
   }
 

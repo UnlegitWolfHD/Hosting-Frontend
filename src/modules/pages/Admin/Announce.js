@@ -93,7 +93,7 @@ export default function Announce() {
     if (filterName === "") search = "."
     AnnouncementService.getAll(search, page, rowsPerPage)
       .then(res => {
-        setAnnouncements(res.data.tempData)
+        setAnnouncements(res.data.paginatedAnnouncements)
         setMaxItems(res.data.count)
       })
   }

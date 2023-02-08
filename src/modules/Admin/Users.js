@@ -91,13 +91,15 @@ export default function Users() {
   );
 
   const getAllUser = () => {
+    console.log("Test")
     setLoading(true)
     let search = searchString
     if (searchString === "") search = "."
     UserService.getAllUser(search)
       .then(res => {
+        console.log(res.data)
         setTimeout(() => {
-          setUser(res.data)
+          //setUser(new Array())
           setLoading(false)
         }, 50);
       })
