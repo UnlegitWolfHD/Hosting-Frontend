@@ -9,6 +9,7 @@ import LogoOnlyLayout from './modules/layouts/LogoOnlyLayout';
 import NotFound from './modules/pages/Page404';
 import DashboardApp from './modules/pages/DashboardApp';
 import Profil from './modules/pages/Profil';
+import KvmPage from './modules/pages/KvmPage';
 
 import Login from './modules/pages/Login';
 import Register from './modules/pages/Register';
@@ -26,7 +27,8 @@ export default function Router() {
       element: <DashboardLayout />,
       children: [
         { path: 'app', element: <DashboardApp /> },
-        { path: 'profil', element: <Profil /> }
+        { path: 'profil', element: <Profil /> },
+        { path: 'kvm', element: <KvmPage /> }
       ],
     },
     {
