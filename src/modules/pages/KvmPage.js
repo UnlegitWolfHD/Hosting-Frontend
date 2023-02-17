@@ -4,15 +4,15 @@ import { useState } from 'react';
 import { Container, Stack, Typography } from '@mui/material';
 // components
 import { KvmForm } from '../sections/user/kvm';
-// mock
+
+import proxmoxService from '../../services/proxmox.service';
 
 // ----------------------------------------------------------------------
 
 export default function ProductsPage() {
-  const [kvmList, setKVMList] = useState([]);
 
   const saveData = (data) => {
-
+    console.log(data)
   }
 
   return (
@@ -25,7 +25,7 @@ export default function ProductsPage() {
         <Typography variant="h4" sx={{ mb: 5 }}>
           KVM Rootserver
         </Typography>
-        <KvmForm userData={""} onSubmitData={saveData} />
+        <KvmForm kvmTemplates={[]} onSubmitData={saveData} />
       </Container>
     </>
   );

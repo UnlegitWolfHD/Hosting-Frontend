@@ -7,6 +7,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import { Grid, Card, CardContent, Slider, Typography } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 import { LoadingButton } from '@mui/lab';
 // components
@@ -15,26 +19,23 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 // ----------------------------------------------------------------------
 
 KvmForm.propTypes = {
-  userData: PropTypes.object,
+  kvmParams: PropTypes.object,
+  kvmTemplates: PropTypes.object,
   onSubmitData: PropTypes.func
 };
 
-export default function KvmForm({ userData, onSubmitData }) {
+export default function KvmForm({ kvmParams, kvmTemplates, onSubmitData }) {
   const [cores, setCores] = React.useState(1);
   const [ram, setRam] = React.useState(1);
   const [storage, setStorage] = React.useState(16);
-
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().email('E-Mail muss eine gültige E-Mail-Adresse sein').required('Email ist erforderlich'),
-  });
+  const [selectedTemplate, setSelectedTemplate] = React.useState('');
 
   const defaultValues = {
-    username: userData.name,
-    email: userData.email,
+    cores: kvmParams.minCores,
+    ram: kvmParams.minRam,
   };
 
   const methods = useForm({
-    resolver: yupResolver(LoginSchema),
     defaultValues,
   });
 
@@ -52,7 +53,7 @@ export default function KvmForm({ userData, onSubmitData }) {
       <Grid item xs={2} md={5} lg={8}>
         <Card>
           <CardContent>
-            <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <FormProvider onSubmit={handleSubmit(onSubmit)}>
               <Grid
                 container
                 direction="row"
@@ -98,6 +99,22 @@ export default function KvmForm({ userData, onSubmitData }) {
                     onChange={(e) => setStorage(e.target.value)}
                     aria-labelledby="non-linear-slider"
                   />
+                </Grid>
+                <Grid item xs={12} md={6} lg={8}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">OS</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={selectedTemplate}
+                      label="Age"
+                      onChange={(e) => setSelectedTemplate(e.target.value)}
+                    >
+                      {kvmTemplates.map((e, index) => {
+                        <MenuItem value={e.id}>{e.name}</MenuItem>
+                      })}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid item xs={0} md={0} lg={5}>
                   <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
