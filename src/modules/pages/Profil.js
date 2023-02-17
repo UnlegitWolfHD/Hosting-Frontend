@@ -6,7 +6,7 @@ import { Container, Typography } from '@mui/material';
 // components
 import Page from '../components/Page';
 // sections
-import { ProfilForm, GameForm } from '../sections/user/profil';
+import { ProfilForm } from '../sections/user/profil';
 
 import loginService from '../../services/login.service';
 import userService from '../../services/user.service';
